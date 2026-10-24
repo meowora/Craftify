@@ -89,6 +89,14 @@ dependencies {
     }
 }
 
+tasks.withType<ProcessResources> {
+    inputs.property("version", version.toString())
+
+    filesMatching("fabric.mod.json") {
+        expand("version" to version.toString())
+    }
+}
+
 tasks.withType<ShadowJar> {
     archiveClassifier.set("")
     configurations = listOf(shadowImplementation)
